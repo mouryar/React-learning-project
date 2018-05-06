@@ -58,6 +58,10 @@ class BurgerBuilder extends Component{
         })
     }
 
+    continuePurchasehandler = () =>{
+        alert("You are done !!");
+    }
+
     removeIngredientHandler = (type)=>{
         const typeCount = this.state.ingredients[type];
         if(typeCount === 0){
@@ -85,6 +89,9 @@ class BurgerBuilder extends Component{
                 <Modal purchasing={this.state.purchasing} modelClosed={this.purchseCancelHandler}>
                     <OrderSummary
                     ingredients={this.state.ingredients}
+                    orderCanceled={this.purchseCancelHandler}
+                    oderFinished={this.continuePurchasehandler}
+                    totalPrice={this.state.totalPrice}
                     />
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
