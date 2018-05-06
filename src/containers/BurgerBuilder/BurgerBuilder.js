@@ -1,6 +1,9 @@
 import React,{Component} from 'react';
 import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
+import Aux from '../../hoc/Aux'
+import Modal from '../../components/UI/Modal/Modal'
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 
 const INGERIENTS_PRICE_MAP = {
             meat: 0.5,
@@ -17,7 +20,8 @@ class BurgerBuilder extends Component{
             bacon: 0
         },
         totalPrice: 4,
-        puchasable: false
+        puchasable: false,
+        purchasing: false
     }
     addIngredientHandler = (type) => {
         const typeCount = this.state.ingredients[type];
@@ -44,6 +48,16 @@ class BurgerBuilder extends Component{
         })
     }
 
+    showOrderSummaryHandler = () => {
+        this.setState({purchasing: true})
+    }
+
+    purchseCancelHandler = () =>{
+        this.setState({
+            purchasing: false
+        })
+    }
+
     removeIngredientHandler = (type)=>{
         const typeCount = this.state.ingredients[type];
         if(typeCount === 0){
@@ -67,15 +81,21 @@ class BurgerBuilder extends Component{
             disableInfo[key] = disableInfo[key] <= 0;
         }
         return(
-            <div>
+            <Aux>
+                <Modal purchasing={this.state.purchasing} modelClosed={this.purchseCancelHandler}>
+                    <OrderSummary
+                    ingredients={this.state.ingredients}
+                    />
+                </Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls 
                     addIngredient={this.addIngredientHandler} 
                     removeIngredient={this.removeIngredientHandler}
                     disabled={disableInfo}
                     totalPrice={this.state.totalPrice}
-                    puchasable={this.state.puchasable}/>
-            </div>
+                    puchasable={this.state.puchasable}
+                    showOrderSummary = {this.showOrderSummaryHandler}/>
+            </Aux>
         );
     }
 }
