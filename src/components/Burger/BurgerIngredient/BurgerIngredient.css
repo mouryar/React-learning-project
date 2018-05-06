@@ -8,7 +8,7 @@
 }
 
 .BreadTop {
-    height: 20%;
+    height: 30%;
     width: 80%;
     background: linear-gradient(#bc581e, #e27b36);
     border-radius: 50% 50% 0 0;
@@ -18,7 +18,7 @@
 }
 
 .Seeds1 {
-    width: 10%;
+    width: 5%;
     height: 15%;
     position: absolute;
     background-color: white;
@@ -56,7 +56,7 @@
   }
 
   .Seeds2 {
-    width: 10%;
+    width: 5%;
     height: 15%;
     position: absolute;
     background-color: white;
